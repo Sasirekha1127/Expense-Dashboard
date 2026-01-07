@@ -37,7 +37,7 @@ export default function SummaryCards() {
 
           <div>
             <p className="text-gray-500 text-sm">{category}</p>
-            <p className="text-lg font-bold">₹{amount}</p>
+            <p className="text-lg text-gray-600 font-bold">₹{amount}</p>
           </div>
         </div>
       ))}

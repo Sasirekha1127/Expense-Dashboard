@@ -36,27 +36,32 @@ export default function Topbar() {
       />
 
       {/* RIGHT ICONS */}
-      <div className="hidden md:flex items-center gap-4">
-        {/* THEME TOGGLE */}
-        <button
-          onClick={toggleTheme}
-          className="p-2 rounded-full bg-gray-100 dark:bg-gray-700"
-          title="Toggle theme"
-        >
-          {theme === "light" ? (
-            <Moon size={18} className="text-gray-600" />
-          ) : (
-            <Sun size={18} className="text-yellow-400" />
-          )}
-        </button>
+<div className="flex items-center gap-3 md:gap-4">
+  {/* THEME TOGGLE */}
+  <button
+    onClick={toggleTheme}
+    className="p-2 rounded-full bg-gray-100 dark:bg-gray-700"
+    title="Toggle theme"
+  >
+    {theme === "light" ? (
+      <Moon size={18} className="text-gray-600" />
+    ) : (
+      <Sun size={18} className="text-yellow-400" />
+    )}
+  </button>
 
-        <Bell className="text-gray-500 dark:text-gray-300 cursor-pointer" />
-        <Settings className="text-gray-500 dark:text-gray-300 cursor-pointer" />
+  {/* Hide other icons only on mobile */}
+  <div className="hidden md:flex items-center gap-4">
+    <Bell className="text-gray-500 dark:text-gray-300 cursor-pointer" />
+    <Settings className="text-gray-500 dark:text-gray-300 cursor-pointer" />
 
-        <div className="w-10 h-10 rounded-full bg-purple-500 text-white flex items-center justify-center font-semibold">
-          AT
-        </div>
-      </div>
+    <div className="w-10 h-10 rounded-full bg-purple-500 text-white flex items-center justify-center font-semibold">
+      AT
     </div>
+  </div>
+</div>
+
+      </div>
+    // </div>
   );
 }
