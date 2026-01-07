@@ -24,14 +24,13 @@ export default function ExpenseList() {
     startIndex + itemsPerPage
   );
 
-  // reset page on filter change
   useEffect(() => {
     setCurrentPage(1);
   }, [search, category]);
 
   if (!filtered.length) {
     return (
-      <p className="text-center mt-4 text-gray-500">
+      <p className="text-center mt-4 text-gray-500 dark:text-gray-400">
         No records found
       </p>
     );
@@ -40,10 +39,10 @@ export default function ExpenseList() {
   return (
     <div className="mt-6">
       {/* ================= DESKTOP TABLE ================= */}
-      <div className="hidden md:block bg-white rounded-lg shadow overflow-x-auto">
+      <div className="hidden md:block bg-white dark:bg-gray-800 rounded-lg shadow overflow-x-auto">
         <table className="w-full">
           <thead>
-            <tr className="text-left text-gray-500 border-b">
+            <tr className="text-left text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-gray-700">
               <th className="p-3">Title</th>
               <th className="p-3">Amount</th>
               <th className="p-3">Category</th>
@@ -57,7 +56,9 @@ export default function ExpenseList() {
             {paginatedData.map((e) => (
               <tr
                 key={e.id}
-                className="border-b hover:bg-gray-50 text-gray-700"
+                className="border-b border-gray-200 dark:border-gray-700
+                           hover:bg-gray-50 dark:hover:bg-gray-700
+                           text-gray-700 dark:text-gray-200"
               >
                 <td className="p-3 font-medium">{e.title}</td>
                 <td className="p-3">₹{e.amount}</td>
@@ -92,9 +93,7 @@ export default function ExpenseList() {
 
                 <td className="p-3">
                   <button
-                    onClick={() =>
-                      dispatch(deleteExpense(e.id))
-                    }
+                    onClick={() => dispatch(deleteExpense(e.id))}
                     className="text-red-500 hover:underline"
                   >
                     Delete
@@ -107,18 +106,19 @@ export default function ExpenseList() {
       </div>
 
       {/* ================= MOBILE CARDS ================= */}
-      <div className="md:hidden space-y-4 ">
+      <div className="md:hidden space-y-4">
         {paginatedData.map((e) => (
           <div
             key={e.id}
-            className="bg-white rounded-lg shadow p-4"
+            className="bg-white dark:bg-gray-800 rounded-lg shadow p-4
+                       text-gray-900 dark:text-gray-100"
           >
-            <div className="flex justify-between mb-2 ">
+            <div className="flex justify-between mb-2">
               <h3 className="font-semibold">{e.title}</h3>
               <span className="font-bold">₹{e.amount}</span>
             </div>
 
-            <p className="text-sm text--500">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
               {e.category} • {e.date}
             </p>
 
@@ -148,9 +148,7 @@ export default function ExpenseList() {
               </select>
 
               <button
-                onClick={() =>
-                  dispatch(deleteExpense(e.id))
-                }
+                onClick={() => dispatch(deleteExpense(e.id))}
                 className="text-red-500 text-sm"
               >
                 Delete
@@ -163,27 +161,27 @@ export default function ExpenseList() {
       {/* ================= PAGINATION ================= */}
       {totalPages > 1 && (
         <div className="flex justify-between items-center mt-4 px-2">
-          <span className="text-sm text-gray-500">
+          <span className="text-sm text-gray-500 dark:text-gray-400">
             Page {currentPage} of {totalPages}
           </span>
 
           <div className="flex gap-2">
             <button
               disabled={currentPage === 1}
-              onClick={() =>
-                setCurrentPage((p) => p - 1)
-              }
-              className="px-3 py-1 border rounded disabled:opacity-40"
+              onClick={() => setCurrentPage((p) => p - 1)}
+              className="px-3 py-1 border rounded
+                         border-gray-300 dark:border-gray-600
+                         disabled:opacity-40"
             >
               Prev
             </button>
 
             <button
               disabled={currentPage === totalPages}
-              onClick={() =>
-                setCurrentPage((p) => p + 1)
-              }
-              className="px-3 py-1 border rounded disabled:opacity-40"
+              onClick={() => setCurrentPage((p) => p + 1)}
+              className="px-3 py-1 border rounded
+                         border-gray-300 dark:border-gray-600
+                         disabled:opacity-40"
             >
               Next
             </button>

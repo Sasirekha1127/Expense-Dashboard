@@ -14,14 +14,22 @@ export default function SummaryDashboard() {
   }, [expenses]);
 
   return (
-    <div className="grid grid-cols-3 gap-4 mt-6">
+    <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {Object.entries(categoryTotals).map(([cat, amt]) => (
         <div
           key={cat}
-          className="bg-white rounded-xl p-4 shadow-sm"
+          className="
+            rounded-xl p-4 shadow-sm
+            bg-white dark:bg-gray-800
+            text-gray-900 dark:text-gray-100
+          "
         >
-          <p className="text-sm text-gray-500">{cat}</p>
-          <h2 className="text-xl font-semibold">₹{amt}</h2>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            {cat}
+          </p>
+          <h2 className="text-xl font-semibold mt-1">
+            ₹{amt}
+          </h2>
         </div>
       ))}
     </div>

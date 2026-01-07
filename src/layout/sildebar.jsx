@@ -29,10 +29,11 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* MOBILE TOGGLE BUTTON */}
+      {/* MOBILE TOGGLE */}
       <button
         onClick={() => setOpen(true)}
-        className="md:hidden fixed top-4 right-4 z-50 bg-purple-600 text-white p-2 rounded-lg"
+        className="md:hidden fixed top-4 right-4 z-50
+        bg-purple-600 text-white p-2 rounded-lg"
       >
         <Menu size={20} />
       </button>
@@ -47,18 +48,25 @@ export default function Sidebar() {
 
       {/* SIDEBAR */}
       <aside
-        className={`fixed md:static z-50 top-0 left-0 h-full w-64 bg-[#faf7ff] border-r px-6 py-6
-        transform transition-transform duration-300
-        ${open ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
+        className={`
+          fixed md:static z-50 top-0 left-0 h-full w-64
+          bg-white dark:bg-gray-900
+          border-r border-gray-200 dark:border-gray-700
+          px-6 py-6
+          transform transition-transform duration-300
+          ${open ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
+        `}
       >
-        {/* CLOSE BUTTON (MOBILE) */}
+        {/* CLOSE (MOBILE) */}
         <button
           onClick={() => setOpen(false)}
-          className="md:hidden absolute top-4 right-4"
+          className="md:hidden absolute top-4 right-4
+          text-gray-700 dark:text-gray-300"
         >
           <X />
         </button>
 
+        {/* LOGO */}
         <h1 className="text-2xl font-bold text-purple-600 mb-10">
           FloPay
         </h1>
@@ -68,11 +76,15 @@ export default function Sidebar() {
           {menu.map(({ icon: Icon, label, active }) => (
             <div
               key={label}
-              className={`flex items-center gap-3 px-4 py-2 rounded-lg cursor-pointer
-              ${active
-                ? "bg-purple-100 text-purple-600 font-semibold"
-                : "text-gray-600 hover:bg-gray-100"
-              }`}
+              className={`
+                flex items-center gap-3 px-4 py-2 rounded-lg cursor-pointer
+                transition
+                ${
+                  active
+                    ? "bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400 font-semibold"
+                    : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                }
+              `}
             >
               <Icon size={18} />
               <span>{label}</span>
@@ -81,11 +93,15 @@ export default function Sidebar() {
         </nav>
 
         {/* LOGOUT */}
-        <div className="mt-10 pt-4 border-t">
+        <div className="mt-10 pt-4 border-t border-gray-200 dark:border-gray-700">
           <button
             onClick={logout}
-            className="flex items-center gap-3 px-4 py-2 w-full rounded-lg
-            text-red-600 font-semibold hover:bg-red-100 transition"
+            className="
+              flex items-center gap-3 px-4 py-2 w-full rounded-lg
+              text-red-600 dark:text-red-400 font-semibold
+              hover:bg-red-100 dark:hover:bg-red-900/30
+              transition
+            "
           >
             <LogOut size={18} />
             Logout
