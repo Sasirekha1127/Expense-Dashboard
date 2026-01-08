@@ -93,9 +93,11 @@ export default function Login() {
             className={inputClass("name") + " dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-purple-400"}
             placeholder="Enter your name"
             value={form.name}
-            onChange={(e) =>
-              setForm({ ...form, name: e.target.value })
-            }
+            onChange={(e) =>{
+                  const value = e.target.value.replace(/[^a-zA-Z\s]/g, "");
+
+              setForm({ ...form, name:value })
+            }}
           />
 
           {isSubmitted && errors.name && (

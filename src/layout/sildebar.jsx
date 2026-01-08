@@ -26,6 +26,16 @@ const menu = [
 export default function Sidebar() {
   const [open, setOpen] = useState(false);
   const { logout } = useAuth();
+  const handleLogout = () => {
+  const confirmLogout = window.confirm(
+    "Are you sure you want to logout?"
+  );
+
+  if (confirmLogout) {
+    logout();
+  }
+};
+
 
   return (
     <>
@@ -79,10 +89,9 @@ export default function Sidebar() {
               className={`
                 flex items-center gap-3 px-4 py-2 rounded-lg cursor-pointer
                 transition
-                ${
-                  active
-                    ? "bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400 font-semibold"
-                    : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                ${active
+                  ? "bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400 font-semibold"
+                  : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
                 }
               `}
             >
@@ -95,17 +104,18 @@ export default function Sidebar() {
         {/* LOGOUT */}
         <div className="mt-10 pt-4 border-t border-gray-200 dark:border-gray-700">
           <button
-            onClick={logout}
+            onClick={handleLogout}
             className="
-              flex items-center gap-3 px-4 py-2 w-full rounded-lg
-              text-red-600 dark:text-red-400 font-semibold
-              hover:bg-red-100 dark:hover:bg-red-900/30
-              transition
-            "
+    flex items-center gap-3 px-4 py-2 w-full rounded-lg
+    text-red-600 dark:text-red-400 font-semibold
+    hover:bg-red-100 dark:hover:bg-red-900/30
+    transition
+  "
           >
             <LogOut size={18} />
             Logout
           </button>
+
         </div>
       </aside>
     </>

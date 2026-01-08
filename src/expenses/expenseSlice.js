@@ -1,13 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// Load from localStorage
 const storedExpenses =
   JSON.parse(localStorage.getItem("expenses")) || [];
 
 const expenseSlice = createSlice({
   name: "expenses",
   initialState: {
-    expenses: storedExpenses, 
+    expenses: storedExpenses,
     search: "",
     category: "All",
   },
@@ -17,8 +16,6 @@ const expenseSlice = createSlice({
         ...action.payload,
         status: "Pending",
       });
-
-      // Save to localStorage
       localStorage.setItem(
         "expenses",
         JSON.stringify(state.expenses)
@@ -29,7 +26,6 @@ const expenseSlice = createSlice({
       state.expenses = state.expenses.filter(
         (e) => e.id !== action.payload
       );
-
       localStorage.setItem(
         "expenses",
         JSON.stringify(state.expenses)
@@ -43,7 +39,6 @@ const expenseSlice = createSlice({
       );
       if (expense) {
         expense.status = status;
-
         localStorage.setItem(
           "expenses",
           JSON.stringify(state.expenses)
@@ -58,12 +53,6 @@ const expenseSlice = createSlice({
     setCategory(state, action) {
       state.category = action.payload;
     },
-
-    // Logout clear action (optional but best)
-    clearExpenses(state) {
-      state.expenses = [];
-      localStorage.removeItem("expenses");
-    },
   },
 });
 
@@ -73,7 +62,6 @@ export const {
   updateStatus,
   setSearch,
   setCategory,
-  clearExpenses,
 } = expenseSlice.actions;
 
 export default expenseSlice.reducer;

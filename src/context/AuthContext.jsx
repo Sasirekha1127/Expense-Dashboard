@@ -1,13 +1,9 @@
 import { createContext, useContext, useState } from "react";
-import { useDispatch } from "react-redux";
-import { clearExpenses } from "../expenses/expenseSlice";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const dispatch = useDispatch();
-
-  //  load auth from localStorage
+  // load auth from localStorage
   const [isAuth, setIsAuth] = useState(
     localStorage.getItem("isAuth") === "true"
   );
@@ -20,11 +16,9 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setIsAuth(false);
 
-    // clear everything on logout
     localStorage.removeItem("isAuth");
-    localStorage.removeItem("expenses");
 
-    dispatch(clearExpenses());
+    
   };
 
   return (
