@@ -7,7 +7,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const dispatch = useDispatch();
 
-  // ✅ load auth from localStorage
+  //  load auth from localStorage
   const [isAuth, setIsAuth] = useState(
     localStorage.getItem("isAuth") === "true"
   );
