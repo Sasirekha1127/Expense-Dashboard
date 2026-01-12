@@ -2,14 +2,13 @@ import { useSelector } from "react-redux";
 
 export default function BalanceCard() {
   const expenses = useSelector((s) => s.expenses.expenses);
-  const deposit = useSelector((s) => s.wallet.deposit); // ✅ FIXED
-
+  const deposit = useSelector((s) => s.wallet.deposit); 
   const totalExpense = expenses.reduce(
     (sum, e) => sum + Number(e.amount || 0),
     0
   );
 
-  const balance = Math.max(deposit - totalExpense, 0);
+const balance = deposit - totalExpense;
 
   return (
     <div className="

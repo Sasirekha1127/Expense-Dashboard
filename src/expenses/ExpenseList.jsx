@@ -40,22 +40,20 @@ export default function Transactions() {
 
   // ================= FILTER =================
   const filtered = expenses.filter((e) => {
-    const text = localSearch.toLowerCase();
+  const text = search.toLowerCase();
 
-    const matchSearch =
-      (e.title || "").toLowerCase().includes(text) ||
-      (e.category || "").toLowerCase().includes(text) ||
-      String(e.amount || "").includes(text) ||
-      (e.date || "").includes(text);
+  const matchSearch =
+    (e.title || "").toLowerCase().includes(text);
 
-    const matchCategory =
-      localCategory === "All"
-        ? true
-        : (e.category || "").toLowerCase() ===
-          localCategory.toLowerCase();
+  const matchCategory =
+    localCategory === "All"
+      ? true
+      : (e.category || "").toLowerCase() ===
+        localCategory.toLowerCase();
 
-    return matchSearch && matchCategory;
-  });
+  return matchSearch && matchCategory;
+});
+
 
   const totalPages = Math.ceil(filtered.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -223,11 +221,10 @@ export default function Transactions() {
             {paginatedData.map((e) => (
               <tr
                 key={e.id}
-                className={`border-b dark:border-gray-700 ${
-                  editId === e.id
+                className={`border-b dark:border-gray-700 ${editId === e.id
                     ? "bg-purple-50 dark:bg-gray-700/50"
                     : ""
-                }`}
+                  }`}
               >
                 {editId === e.id ? (
                   <>
