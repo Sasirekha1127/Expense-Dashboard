@@ -12,10 +12,7 @@ const expenseSlice = createSlice({
   },
   reducers: {
     addExpense(state, action) {
-      state.expenses.push({
-        ...action.payload,
-        status: "Pending",
-      });
+      state.expenses.push(action.payload);
       localStorage.setItem(
         "expenses",
         JSON.stringify(state.expenses)
@@ -32,13 +29,18 @@ const expenseSlice = createSlice({
       );
     },
 
-    updateStatus(state, action) {
-      const { id, status } = action.payload;
-      const expense = state.expenses.find(
+    updateExpense(state, action) {
+      const { id, data } = action.payload;
+      const index = state.expenses.findIndex(
         (e) => e.id === id
       );
-      if (expense) {
-        expense.status = status;
+
+      if (index !== -1) {
+        state.expenses[index] = {
+          ...state.expenses[index],
+          ...data,
+        };
+
         localStorage.setItem(
           "expenses",
           JSON.stringify(state.expenses)
@@ -59,7 +61,7 @@ const expenseSlice = createSlice({
 export const {
   addExpense,
   deleteExpense,
-  updateStatus,
+  updateExpense, 
   setSearch,
   setCategory,
 } = expenseSlice.actions;

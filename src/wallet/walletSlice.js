@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const storedDeposit = JSON.parse(
+const storedDeposit = Number(
   localStorage.getItem("deposit")
 ) || 0;
 
@@ -11,10 +11,14 @@ const walletSlice = createSlice({
   },
   reducers: {
     addDeposit(state, action) {
-      state.deposit += Number(action.payload);
+      const amount = Number(action.payload);
+
+      if (isNaN(amount) || amount <= 0) return;
+
+      state.deposit += amount;
       localStorage.setItem(
         "deposit",
-        JSON.stringify(state.deposit)
+        state.deposit.toString()
       );
     },
     clearWallet(state) {

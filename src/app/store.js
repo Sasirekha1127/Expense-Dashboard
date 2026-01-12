@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import expenseReducer from "../expenses/expenseSlice";
 import walletReducer from "../wallet/walletSlice";
+import expenseReducer from "../expenses/expenseSlice";
 
 export const store = configureStore({
   reducer: {
-    expenses: expenseReducer,
     wallet: walletReducer,
+    expenses: expenseReducer,
   },
 });
