@@ -40,19 +40,28 @@ export default function Transactions() {
 
   // ================= FILTER =================
   const filtered = expenses.filter((e) => {
-  const text = search.toLowerCase();
+    const globalText = search.toLowerCase();      // Topbar search
+    const localText = localSearch.toLowerCase();  // ExpenseList filter
 
-  const matchSearch =
-    (e.title || "").toLowerCase().includes(text);
+    // 🔹 Topbar → TITLE ONLY
+    const matchGlobalSearch =
+      (e.title || "").toLowerCase().includes(globalText);
 
-  const matchCategory =
-    localCategory === "All"
-      ? true
-      : (e.category || "").toLowerCase() ===
+    // 🔹 Local filter → ALL FIELDS
+    const matchLocalSearch =
+      (e.title || "").toLowerCase().includes(localText) ||
+      (e.category || "").toLowerCase().includes(localText) ||
+      (e.amount?.toString() || "").includes(localText) ||
+      (e.date || "").includes(localText);
+
+    const matchCategory =
+      localCategory === "All"
+        ? true
+        : (e.category || "").toLowerCase() ===
         localCategory.toLowerCase();
 
-  return matchSearch && matchCategory;
-});
+    return matchGlobalSearch && matchLocalSearch && matchCategory;
+  });
 
 
   const totalPages = Math.ceil(filtered.length / itemsPerPage);
@@ -178,7 +187,14 @@ export default function Transactions() {
               <>
                 <div className="flex justify-between">
                   <h3 className="font-semibold">{e.title}</h3>
-                  <span className="font-bold">₹{e.amount}</span>
+                  <span
+                    className={`font-bold ${e.type === "income"
+                      ? "text-green-500"
+                      : "text-red-500"
+                      }`}
+                  >
+                    ₹{e.amount}
+                  </span>
                 </div>
 
                 <p className="text-sm text-gray-500">
@@ -222,8 +238,8 @@ export default function Transactions() {
               <tr
                 key={e.id}
                 className={`border-b dark:border-gray-700 ${editId === e.id
-                    ? "bg-purple-50 dark:bg-gray-700/50"
-                    : ""
+                  ? "bg-purple-50 dark:bg-gray-700/50"
+                  : ""
                   }`}
               >
                 {editId === e.id ? (
@@ -296,7 +312,14 @@ export default function Transactions() {
                 ) : (
                   <>
                     <td className="p-3">{e.title}</td>
-                    <td className="p-3">₹{e.amount}</td>
+                    <td
+                      className={`p-3 font-semibold ${e.type === "income"
+                          ? "text-green-500"
+                          : "text-red-500"
+                        }`}
+                    >
+                      ₹{e.amount}
+                    </td>
                     <td className="p-3">{e.category}</td>
                     <td className="p-3">{e.date}</td>
                     <td className="p-3 flex gap-3">

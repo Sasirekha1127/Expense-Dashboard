@@ -12,7 +12,7 @@ export default function Login() {
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // 🔍 VALIDATION
+  // VALIDATION
   const validate = () => {
     const newErrors = {};
 

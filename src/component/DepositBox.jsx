@@ -9,21 +9,23 @@ export default function DepositBox() {
   const [amount, setAmount] = useState("");
   const [error, setError] = useState("");
 
+
   const handleAdd = () => {
-    if (!amount) {
-      setError("Amount is required");
-      return;
-    }
+  if (!amount) {
+    setError("Amount is required");
+    return;
+  }
 
-    if (Number(amount) <= 0) {
-      setError("Amount must be greater than 0");
-      return;
-    }
+  if (Number(amount) <= 0) {
+    setError("Amount must be greater than 0");
+    return;
+  }
 
-    dispatch(addDeposit(amount));
-    setAmount("");
-    setError("");
-  };
+  dispatch(addDeposit(Number(amount))); 
+  setAmount("");
+  setError("");
+};
+
 
   return (
     <div
@@ -57,10 +59,9 @@ export default function DepositBox() {
             text-gray-900 dark:text-gray-100
             placeholder-gray-400 dark:placeholder-gray-400
             focus:outline-none focus:ring-2
-            ${
-              error
-                ? "border-red-500 focus:ring-red-400"
-                : "border-gray-300 dark:border-gray-600 focus:ring-purple-500"
+            ${error
+              ? "border-red-500 focus:ring-red-400"
+              : "border-gray-300 dark:border-gray-600 focus:ring-purple-500"
             }
           `}
         />
@@ -88,9 +89,10 @@ export default function DepositBox() {
       {/* INFO */}
       <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
         Current Deposit:{" "}
-        <span className="font-semibold text-gray-800 dark:text-gray-100">
+        <span className="font-semibold text-green-600">
           ₹{deposit}
         </span>
+
       </p>
 
       {/* CLEAR */}
